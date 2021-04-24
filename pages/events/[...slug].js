@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { Fragment, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
@@ -29,8 +30,20 @@ const FilteredEventsPage = () => {
         }
     }, [data]);
 
+    let pageHeadData = (
+        <Head>
+            <title>Filtered Events</title>
+            <meta name="description" content="A list of filtered events"></meta>
+        </Head>
+    );
+
     if (!loadedEvents) {
-        return <p className="center">Loading ...</p>;
+        return (
+            <Fragment>
+                {pageHeadData}
+                <p className="center">Loading ...</p>
+            </Fragment>
+        );
     }
 
     const filteredYear = +filterData[0];
@@ -38,6 +51,16 @@ const FilteredEventsPage = () => {
 
     const numYear = +filteredYear;
     const numMonth = +filteredMonth;
+
+    pageHeadData = (
+        <Head>
+            <title>Filtered Events</title>
+            <meta
+                name="description"
+                content={`All Events for ${numMonth}/${numYear}`}
+            ></meta>
+        </Head>
+    );
 
     if (
         isNaN(numYear) ||
@@ -50,6 +73,7 @@ const FilteredEventsPage = () => {
     ) {
         return (
             <Fragment>
+                {pageHeadData}
                 <ErrorAlert>
                     <p>Invalid filter !!!</p>
                 </ErrorAlert>
@@ -71,6 +95,7 @@ const FilteredEventsPage = () => {
     if (!filteredEvents || filteredEvents.length === 0) {
         return (
             <Fragment>
+                {pageHeadData}
                 <ErrorAlert>
                     <p>No matched events !!!</p>
                 </ErrorAlert>
@@ -85,6 +110,7 @@ const FilteredEventsPage = () => {
 
     return (
         <Fragment>
+            {pageHeadData}
             <ResultsTitle date={dateObject} />
             <EventList items={filteredEvents} />
         </Fragment>
