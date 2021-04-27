@@ -7,42 +7,42 @@ import EventList from '../../components/events/event-list';
 import EventsSearch from '../../components/events/events-search';
 
 function AllEventsPage(props) {
-  const router = useRouter();
-  const { events } = props;
+    const router = useRouter();
+    const { events } = props;
 
-  function findEventsHandler(year, month) {
-    const fullPath = `/events/${year}/${month}`;
+    function findEventsHandler(year, month) {
+        const fullPath = `/events/${year}/${month}`;
 
-    router.push(fullPath);
-  }
+        router.push(fullPath);
+    }
 
-  return (
-    <Fragment>
-      <Head>
-        <title>All my events</title>
-      </Head>
-      <Head>
-        <title>All Events</title>
-        <meta
-          name='description'
-          content='Find a lot of great events that allow you to evolve...'
-        />
-      </Head>
-      <EventsSearch onSearch={findEventsHandler} />
-      <EventList items={events} />
-    </Fragment>
-  );
+    return (
+        <Fragment>
+            <Head>
+                <title>All my events</title>
+            </Head>
+            <Head>
+                <title>All Events</title>
+                <meta
+                    name="description"
+                    content="Find a lot of great events that allow you to evolve..."
+                />
+            </Head>
+            <EventsSearch onSearch={findEventsHandler} />
+            <EventList items={events} />
+        </Fragment>
+    );
 }
 
 export async function getStaticProps() {
-  const events = await getAllEvents();
+    const events = await getAllEvents();
 
-  return {
-    props: {
-      events: events,
-    },
-    revalidate: 60
-  };
+    return {
+        props: {
+            events: events,
+        },
+        revalidate: 60,
+    };
 }
 
 export default AllEventsPage;

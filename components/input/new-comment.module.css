@@ -7,6 +7,16 @@
     padding: 1rem;
 }
 
+.newCommentsButton {
+    font: inherit;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: #03be9f;
+    border: 1px solid #03be9f;
+    cursor: pointer;
+}
+
 .row {
     display: flex;
     gap: 1rem;
@@ -35,8 +45,4 @@
     border: 1px solid #ccc;
     width: 100%;
     background-color: #dcfff9;
-}
-
-.form button {
-    background-color: white;
 }
